@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-test-pod-env-from
+spec:
+  containers:
+    - name: test-container
+      image: registry.k8s.io/busybox
+      command: [ "/bin/sh", "-c", "env" ]
+      # command: ["tail", "-f", "/dev/null"]
+      envFrom:
+      - configMapRef:
+          name: special-config-multi-keys
+      - configMapRef:
+          name: game-config
+  restartPolicy: Never
