@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: empty-dir
+spec:
+  containers:
+  - name: alpine1
+    image: alpine
+    imagePullPolicy: Always
+    command: ['/bin/sh', '-c', 'echo ciao babe from alpine1']
+    volumeMounts:
+    - name: ciao-babe
+      mountPath: /ciao/babe
+  - name: alpine2
+    image: alpine
+    imagePullPolicy: Always
+    command: ['/bin/sh', '-c', 'echo ciao babe from alpine2']
+    volumeMounts:
+    - name: ciao-babe
+      mountPath: /ciao/babe
+  - name: alpine3
+    image: alpine
+    imagePullPolicy: IfNotPresent
+    command: ['/bin/sh', '-c', 'echo ciao babe from alpine3']
+    volumeMounts:
+    - name: ciao-babe
+      mountPath: /ciao/babe
+  volumes:
+  - name: ciao-babe
+    emptyDir: {}
